@@ -11,7 +11,7 @@
       init: function() {
         var error, this_ref;
         try {
-          if (this.queue.length !== 0) {
+          while (this.queue.length !== 0) {
             this.state = Imuta.clone(this.queue.shift()(this.state));
           }
         } catch (_error) {

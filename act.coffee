@@ -8,7 +8,7 @@ window.Act = (init_state, timeout) ->
 		queue: []
 		init: () -> 
 			try
-				if @queue.length != 0 then @state = Imuta.clone(@queue.shift()(@state))
+				@state = Imuta.clone(@queue.shift()(@state)) while @queue.length != 0
 			catch error
 				console.log "Actor error"
 				console.log error
