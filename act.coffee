@@ -23,6 +23,12 @@ window.Act = (init_state, timeout) ->
 				@queue.length
 			else
 				throw(new Error("Act expects functions arity == 1 (single arg is actor's state)"))
+		zcast: (func) ->
+			if (func.length == 0) and Imuta.is_function(func)
+				@queue.push( ((state) -> Imuta.clone(func)(); state) )
+				@queue.length
+			else
+				throw(new Error("Act expects functions arity == 0"))
 		get: () ->
 			Imuta.clone(@state)
 	}

@@ -32,6 +32,17 @@
           throw new Error("Act expects functions arity == 1 (single arg is actor's state)");
         }
       },
+      zcast: function(func) {
+        if ((func.length === 0) && Imuta.is_function(func)) {
+          this.queue.push((function(state) {
+            Imuta.clone(func)();
+            return state;
+          }));
+          return this.queue.length;
+        } else {
+          throw new Error("Act expects functions arity == 0");
+        }
+      },
       get: function() {
         return Imuta.clone(this.state);
       }
