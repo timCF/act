@@ -18,7 +18,7 @@ Usage
 worker = new Act(init_state, timeout)
 worker.cast((state) -> do_work(state))
 worker.zcast(() -> do_other_work())
-worker.get_state()
+worker.get()
 ```
 Where:
 
