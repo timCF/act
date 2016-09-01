@@ -1,4 +1,4 @@
-window.Act = (init_state, mode, timeout) -> 
+window.Act = (init_state, mode, timeout) ->
 	if (not(Imuta.is_number(timeout)) or (timeout <= 0) or not(mode in ["pure", "global_state"])) then throw(new Error("Act timeout is number >= 0, Act mode is pure or global_state"))
 	obj = {}
 	switch mode
@@ -9,7 +9,7 @@ window.Act = (init_state, mode, timeout) ->
 				#
 				state: Imuta.clone(init_state)
 				queue: []
-				init: () -> 
+				init: () ->
 					try
 						@state = Imuta.clone(@queue.shift()(@state)) while @queue.length != 0
 					catch error
@@ -20,7 +20,7 @@ window.Act = (init_state, mode, timeout) ->
 				#
 				#	public
 				#
-				cast: (func) -> 
+				cast: (func) ->
 					if (func.length == 1) and Imuta.is_function(func)
 						@queue.push(Imuta.clone(func))
 						@queue.length
@@ -42,7 +42,7 @@ window.Act = (init_state, mode, timeout) ->
 				#
 				state: init_state
 				queue: []
-				init: () -> 
+				init: () ->
 					try
 						@state = @queue.shift()(@state) while @queue.length != 0
 					catch error
@@ -53,8 +53,8 @@ window.Act = (init_state, mode, timeout) ->
 				#
 				#	public
 				#
-				cast: (func) -> 
-					if (func.length == 1) and Imuta.is_function(func)
+				cast: (func) ->
+					if (func.length <= 1) and Imuta.is_function(func)
 						@queue.push(Imuta.clone(func))
 						@queue.length
 					else
