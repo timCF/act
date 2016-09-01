@@ -21,7 +21,7 @@ window.Act = (init_state, mode, timeout) ->
 				#	public
 				#
 				cast: (func) ->
-					if (func.length == 1) and Imuta.is_function(func)
+					if (func.length <= 1) and Imuta.is_function(func)
 						@queue.push(Imuta.clone(func))
 						@queue.length
 					else

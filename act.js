@@ -28,7 +28,7 @@
             }), timeout);
           },
           cast: function(func) {
-            if ((func.length === 1) && Imuta.is_function(func)) {
+            if ((func.length <= 1) && Imuta.is_function(func)) {
               this.queue.push(Imuta.clone(func));
               return this.queue.length;
             } else {
